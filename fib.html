@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fibonacci Series Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #608de8;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #f08e8e;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333333;
+    }
+
+    input[type="number"], button {
+      padding: 10px 15px;
+      font-size: 16px;
+      margin: 10px 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      flex: 1;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .generate-btn {
+      background-color: #007BFF;
+      color: white;
+    }
+
+    .generate-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .reset-btn {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .reset-btn:hover {
+      background-color: #b02a37;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 16px;
+      background-color: #e6ffed;
+      padding: 15px;
+      border-radius: 8px;
+      color: #14532d;
+      border: 1px solid #b6e7c9;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Fibonacci Series Generator</h2>
+    <input type="number" id="num" placeholder="Enter number of terms" min="1">
+
+    <div class="btn-group">
+      <button class="generate-btn" onclick="generateFibonacci()">Generate</button>
+      <button class="reset-btn" onclick="resetForm()">Reset</button>
+    </div>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function fibonacciSeries(n) {
+      const series = [0, 1];
+      for (let i = 2; i < n; i++) {
+        series.push(series[i - 1] + series[i - 2]);
+      }
+      return n === 1 ? [0] : series;
+    }
+
+    function generateFibonacci() {
+      const num = parseInt(document.getElementById('num').value);
+      const resultDiv = document.getElementById('result');
+
+      if (!num || num < 1) {
+        resultDiv.innerHTML = "Please enter a valid number (1 or more)";
+        resultDiv.style.backgroundColor = "#fff3cd";
+        resultDiv.style.color = "#856404";
+        resultDiv.style.border = "1px solid #ffeeba";
+        return;
+      }
+
+      const series = fibonacciSeries(num);
+      resultDiv.innerHTML = `<strong>Fibonacci Series:</strong> ${series.join(', ')}`;
+      resultDiv.style.backgroundColor = "#e6ffed";
+      resultDiv.style.color = "#14532d";
+      resultDiv.style.border = "1px solid #b6e7c9";
+    }
+
+    function resetForm() {
+      document.getElementById('num').value = '';
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = '';
+    }
+  </script>
+
+</body>
+</html>
